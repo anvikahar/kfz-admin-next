@@ -45,6 +45,7 @@ async function get_what_sending(request) {
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }
+      
     );
   }
 }
