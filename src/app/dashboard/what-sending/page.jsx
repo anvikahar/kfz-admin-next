@@ -24,9 +24,7 @@ const WhatSendingPage = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.post("/api/get-what-sending", {
-        route_get: "get",
-      });
+      const response = await axios.post("/api/get-what-sending", {route: "get"});
       setWhatSendingData(response.data.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -45,7 +43,7 @@ const WhatSendingPage = () => {
 
   const handleDeleteClick = async (id) => {
     try {
-      await axios.delete(`/api/delete-what-sending/${id}`);
+      await axios.post("/api/get-what-sending", {route: "delete", id: id});
       setWhatSendingData(whatSendingData.filter((item) => item.id !== id));
     } catch (error) {
       console.error("Error deleting item:", error);

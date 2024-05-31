@@ -3,12 +3,13 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 
-export default async function POST(request) {
-  console.log("======-----", request);
-  const { body } = request;
-  console.log("==========================", body);
-  if (body.route === "get") {
-    let data = await get_what_sending(request);
+export async function POST(request) {
+  let jsondata= await request.json();
+  if (jsondata.route == "get") {
+    let data = await get_what_sending(jsondata);
+    return data;
+  }else if(jsondata.route == "delete"){
+    let data = await delete_whatsending(jsondata);
     return data;
   }
 }
@@ -48,7 +49,17 @@ async function get_what_sending(request) {
   }
 }
 
-async function delete_whatsending() {}
+async function delete_whatsending(request) {
+  try {
+    console.log("in delete",request.id);
+    return NextResponse.json(
+      { error: "Success" },
+      { status: 200 }
+    );
+  } catch (error) {
+    
+  }
+}
 
 // Here is the Delete Function for what-sending
 // export async function DELETE(request) {
